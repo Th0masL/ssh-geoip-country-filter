@@ -141,8 +141,8 @@ if [[ ! -z "$LICENSE_KEY" ]]; then
 		last_mmdb_refresh_in_minutes=0
 	fi
 
-	# If the MMDB GEOIP file is missing, or if it was last refreshed more than 31 days ago, download it
-	if [[ ! -f "$MMDB_GEOIP_FILE" || $last_mmdb_refresh_in_days > 31 ]]; then
+	# If the MMDB GEOIP file is missing, or if it was last refreshed more than MMDB_REFRESH_FREQUENCY days ago, download it
+	if [[ ! -f "$MMDB_GEOIP_FILE" || $last_mmdb_refresh_in_days > $MMDB_REFRESH_FREQUENCY ]]; then
 		# If there is already a tar.gz file, delete it so we can re-download it
 		if [[ -f "/tmp/GeoLite2-Country.tar.gz" ]]; then
 			rm -f "/tmp/GeoLite2-Country.tar.gz"
@@ -177,7 +177,7 @@ if [[ ! -z "$LICENSE_KEY" ]]; then
 				# If the new file is different than the existing file, overwrite it
 				if [[ "$new_mmdb_file" != "$MMDB_GEOIP_FILE" ]]; then
 					cp "$new_mmdb_file" "$MMDB_GEOIP_FILE"
-				else # Else no need to overwrite it, but we touch the existing file to update the timestamps of modification, so we don't try to re-download it before the usual 31 days
+				else # Else no need to overwrite it, but we touch the existing file to update the timestamps of modification, so we don't try to re-download it before the usual MMDB_REFRESH_FREQUENCY days
 					touch "$MMDB_GEOIP_FILE"
 				fi
 			else # If for some reason we've not been able to find any GeoLite2-Country.mmdb file in /tmp/, allow the connection and show an error message in syslog
