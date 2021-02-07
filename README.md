@@ -53,7 +53,7 @@ The main purpose of this script is to increase the security of your server by on
 - Step 7 : Make a backup of the file `/etc/hosts.allow` and add the following line to the original one (note presence of the path where the script is located). This line should be the only content of the file.
 
     ```
-    sshd: ALL: aclexec /scripts/ssh-geoip-country-filter/ssh-geoip-country-filter.sh %a$
+    sshd: ALL: aclexec /scripts/ssh-geoip-country-filter/ssh-geoip-country-filter.sh %a
     ```
 
     IMPORTANT : If you have decided to put the script in another folder, update the path of the script to where the script is located
