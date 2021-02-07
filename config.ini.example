@@ -1,0 +1,24 @@
+# Space-separated specific IPs to whitelist
+# Can be either CIDR mask notation or single IP, works with both public range or private range
+#ALLOW_IPS="192.168.0.0/24 192.168.1.0/24 192.168.2.0/24"
+
+# UPPERCASE space-separated country codes to ACCEPT. I.e. : "US UK"
+# You can use ZZ to allow any IPs that will fail to be located/linked to a country.
+# If you leave this variable empty, the script will only try to check for the IP Whitelist above
+#ALLOW_COUNTRIES=""
+
+# MaxMind License Key (www.maxmind.com) to be able to download the mmdb file
+# Go on the MaxMind website and generate a License Key
+# If you leave this variable empty, the script will only try to check for the IP Whitelist above
+#LICENSE_KEY=""
+
+# Path where to store the MMDB Source File. No need to change that.
+# It's convenient to keep it in /tmp since it's a folder that is writable by anyone
+# and this file will automatically be deleted when the server reboot, allowing the script to regenerate a new/fresh one.
+#MMDB_GEOIP_FILE="/tmp/GeoLite2-Country.mmdb"
+
+# Frequency to refresh the IP-to-Country DB File (in days)
+#MMDB_REFRESH_FREQUENCY=31
+
+# Define the log facility. You probably don't need to change that.
+#LOG_FACILITY="authpriv.notice"
