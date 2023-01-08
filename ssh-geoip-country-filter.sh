@@ -1,5 +1,5 @@
 #!/bin/bash
-# 
+#
 # SSH GeoIP Country Filter
 # This script receive an IP in parameter, and returns TRUE (exit 0) if this IP is allowed and FALSE (exit 1) if it isn't
 #
@@ -10,15 +10,16 @@
 # - re-packaged it in a script that makes it easier to use
 # - added automatic download of the MaxMind Database
 # - added safety checks to prevent being locked out of the server in case of mistake/errors in the configuration
-# 
+#
 # ===========================================
 #
 # Requirements :
 #
 # Packages :
+# - bc : for calculating numbers
 # - mmdb-bin : to be able to use the command 'mmdblookup'
 # - grepcidr : to be able to test single IPs against the CIDR notation
-# 
+#
 # Add the following line in /etc/hosts.deny :
 # sshd: ALL
 #
@@ -26,7 +27,7 @@
 # sshd: ALL: aclexec /scripts/ipfilter.sh %a
 #
 # If you want to use the IP-to-Country lookup, you will have to create an account on Max
-# 
+#
 # ===========================================
 #
 # You can verify the behavior of the script by using the following command :
@@ -118,7 +119,7 @@ if [[ ! -z "$ALLOW_IPS" ]]; then
 	# Test the IP against the list of Whitelisted IPs
 	echo $IP_ADDRESS | grepcidr "$ALLOW_IPS" &> /dev/null
 	grepcidr_errorlevel=$?
- 
+
 	# If the grepcidr_errorlevel result is 0, it means that this IP is in the list of Whitelisted IPs, so we log an ALLOW message in syslog and we exit with TRUE(errorlevel:0)
 	if [[ $grepcidr_errorlevel -eq 0 ]]; then
 		logger -s -p $LOG_FACILITY "ALLOW sshd connection from $IP_ADDRESS (Whitelisted)"

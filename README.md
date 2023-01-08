@@ -6,6 +6,13 @@ This script is used to be able to detect the country of an IP Address, and retur
 
 The main purpose of this script is to increase the security of your server by only allowing specific IPs or Countries to log in using SSH.
 
+## Requirements
+
+Packages:
+- bc
+- mmdb-bin
+- grepcidr
+
 ## How to use
 
 **WARNING :**
